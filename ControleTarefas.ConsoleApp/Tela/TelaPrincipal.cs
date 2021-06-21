@@ -15,7 +15,7 @@ namespace ControleTarefas.ConsoleApp.Tela
 
         public TelaPrincipal() : base("Tela Principal")
         {
-            controlador = new Controlador<Tarefa>();
+            //controlador = new Controlador<Tarefa>();
 
             telaAdicionar = new TelaAdicionar<Tarefa>("Adicionar Tarefa");
             telaVisualizar = new TelaVisualizar<Tarefa>("Visualizar Tarefas");

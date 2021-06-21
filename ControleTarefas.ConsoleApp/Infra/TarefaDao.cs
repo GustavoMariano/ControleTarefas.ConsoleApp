@@ -1,44 +1,9 @@
-﻿using System.Data.SqlClient;
-
+﻿
 namespace ControleTarefas.ConsoleApp.Infra
 {
-    public class Db
+    public class TarefaDao
     {
-        public Db()
-        {
-        }
-
-        public void ResetaDadosEIdDB()
-        {
-            string enderecoDb = EnderecoDbControleTarefas();
-            SqlConnection conexaoComBanco = new SqlConnection();
-            conexaoComBanco.ConnectionString = enderecoDb;
-            conexaoComBanco.Open();
-
-            SqlCommand comandoResetar = new SqlCommand();
-            comandoResetar.Connection = conexaoComBanco;
-
-            string sqlResetaID = @"DELETE FROM TbTarefas; DBCC CHECKIDENT('TbTarefas', RESEED, 0)";
-
-            comandoResetar.CommandText = sqlResetaID;
-            comandoResetar.ExecuteScalar();
-        }
-
-        private static string EnderecoDbControleTarefas()
-        {
-            return @"Data Source=(LocalDb)\MSSqlLocalDB;Initial Catalog=DBControleTarefas;Integrated Security=True;Pooling=False";
-        }
-
-        internal SqlConnection AbrirConexaoBanco()
-        {
-            string enderecoDb = EnderecoDbControleTarefas();
-            SqlConnection conexaoComBanco = new SqlConnection();
-            conexaoComBanco.ConnectionString = enderecoDb;
-            conexaoComBanco.Open();
-
-            return conexaoComBanco;
-        }
-
+        #region Scripts
         internal string ObtemQueryInsercaoTarefa()
         {
             return @"INSERT INTO TbTarefas 
@@ -69,7 +34,7 @@ namespace ControleTarefas.ConsoleApp.Infra
                     FROM 
                         TbTarefas";
         }
-        internal string ObtemQuerySelecionarPorId()
+        internal string ObtemQuerySelecionarTarefaPorId()
         {
             return @"SELECT 
                         [Id], 
@@ -90,7 +55,7 @@ namespace ControleTarefas.ConsoleApp.Infra
                         [Titulo] = @Titulo, 
                         [Prioridade] = @Prioridade,
                         [DataConclusao] = @DataConclusao,
-                        [PercentualConclusao] = @PercentualConclusao
+                        [PercentualConclusao] = @Percentual
 	                WHERE 
 		                [Id] = @Id";
         }
@@ -100,6 +65,7 @@ namespace ControleTarefas.ConsoleApp.Infra
             return @"DELETE FROM TbTarefas 	                
 	                WHERE 
 		                [ID] = @ID";
-        }        
+        }
+        #endregion
     }
 }

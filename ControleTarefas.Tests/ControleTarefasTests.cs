@@ -1,21 +1,22 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ControleTarefas.ConsoleApp.Controlador;
 using ControleTarefas.ConsoleApp.Dominio;
-using System;
 using System.Collections.Generic;
-using ControleTarefas.ConsoleApp.Infra;
+using ControleTarefas.ConsoleApp.Infra.Comum;
+using System;
 
 namespace ControleTarefas.Tests
 {
     [TestClass]
     public class ControleTarefasTests
     {
-        Controlador<Tarefa> controleTarefas;
-        Db db; 
+        Db db;
+        ControladorTarefa controleTarefa = new ControladorTarefa();
+        ControladorContato controleContato = new ControladorContato();         
 
         public ControleTarefasTests()
         {
-            controleTarefas = new Controlador<Tarefa>();
+            controleTarefa = new ControladorTarefa();
 
             db = new Db();
             db.ResetaDadosEIdDB();            
@@ -25,9 +26,9 @@ namespace ControleTarefas.Tests
         public void DeveAdicionarTarefa()
         {
             Tarefa tarefa = new Tarefa("DeveAdicionarTarefa", 1);
-            controleTarefas.InserirTarefa(tarefa);
+            controleTarefa.Inserir(tarefa);
 
-            List<Tarefa> listaQtdTarefasBanco = controleTarefas.VisualizarTodasTarefas();
+            List<Tarefa> listaQtdTarefasBanco = controleTarefa.SelecionarTodosOsRegistrosDoBanco();
 
             Assert.AreEqual(1, listaQtdTarefasBanco.Count);
         }
@@ -36,13 +37,13 @@ namespace ControleTarefas.Tests
         public void DeveSelecionarTodasAsTarefas()
         {
             Tarefa tarefa1 = new Tarefa("DeveSelecionarTodasAsTarefa1", 1);
-            controleTarefas.InserirTarefa(tarefa1);
+            controleTarefa.Inserir(tarefa1);
             Tarefa tarefa2 = new Tarefa("DeveSelecionarTodasAsTarefa2", 2);
-            controleTarefas.InserirTarefa(tarefa2);
+            controleTarefa.Inserir(tarefa2);
             Tarefa tarefa3 = new Tarefa("DeveSelecionarTodasAsTarefa3", 3);
-            controleTarefas.InserirTarefa(tarefa3);
+            controleTarefa.Inserir(tarefa3);
 
-            List<Tarefa> list = controleTarefas.VisualizarTodasTarefas();
+            List<Tarefa> list = controleTarefa.SelecionarTodosOsRegistrosDoBanco();
             Assert.AreEqual(3, list.Count);
         }
 
@@ -50,26 +51,26 @@ namespace ControleTarefas.Tests
         public void DeveSelecionarPorIdUmaTarefa()
         {
             Tarefa tarefa1 = new Tarefa("DeveSelecionarPorIdUmaTarefa", 1);
-            controleTarefas.InserirTarefa(tarefa1);
+            controleTarefa.Inserir(tarefa1);
 
-            Tarefa tarefaSelecionada = controleTarefas.SelecionarPorId(1);
+            Tarefa tarefaSelecionada = controleTarefa.SelecionarRegistroPorId(1);
 
-            Assert.AreEqual(1, tarefaSelecionada.Id);
+            Assert.AreEqual(1, tarefaSelecionada.id);
         }
 
         [TestMethod]
         public void DeveEditarUmaTarefa()
         {
             Tarefa inserirTarefaInicial = new Tarefa("Titulo inicial", 3);
-            controleTarefas.InserirTarefa(inserirTarefaInicial);
-            Tarefa tarefaInicialDoBanco = controleTarefas.SelecionarPorId(1);
+            controleTarefa.Inserir(inserirTarefaInicial);
+            Tarefa tarefaInicialDoBanco = controleTarefa.SelecionarRegistroPorId(1);
 
             Assert.AreEqual("Titulo inicial", tarefaInicialDoBanco.Titulo);
 
             DateTime dataConclusao = new DateTime(2021, 12, 31);
             Tarefa tarefaEditada = new Tarefa(1, "Titulo Editado", 1, tarefaInicialDoBanco.DataCriacao, dataConclusao, 100);
-            controleTarefas.EditarTarefa(tarefaEditada);
-            Tarefa tarefaEditadaDoBanco = controleTarefas.SelecionarPorId(1);
+            controleTarefa.Editar(tarefaEditada, 1);
+            Tarefa tarefaEditadaDoBanco = controleTarefa.SelecionarRegistroPorId(1);
 
             Assert.IsTrue(tarefaEditadaDoBanco.Titulo != tarefaInicialDoBanco.Titulo);
         }
@@ -78,15 +79,15 @@ namespace ControleTarefas.Tests
         public void DeveDeletarUmaTarefa()
         {
             Tarefa tarefa1 = new Tarefa("DeveSelecionarTodasAsTarefa1", 1);
-            controleTarefas.InserirTarefa(tarefa1);
+            controleTarefa.Inserir(tarefa1);
             Tarefa tarefa2 = new Tarefa("DeveSelecionarTodasAsTarefa2", 2);
-            controleTarefas.InserirTarefa(tarefa2);
+            controleTarefa.Inserir(tarefa2);
             Tarefa tarefa3 = new Tarefa("DeveSelecionarTodasAsTarefa3", 3);
-            controleTarefas.InserirTarefa(tarefa3);
-            List<Tarefa> listaCom3Tarefas = controleTarefas.VisualizarTodasTarefas();
+            controleTarefa.Inserir(tarefa3);
+            List<Tarefa> listaCom3Tarefas = controleTarefa.SelecionarTodosOsRegistrosDoBanco();
 
-            controleTarefas.DeletarTarefa(2);
-            List<Tarefa> listaAposDeletarUmaTarefa = controleTarefas.VisualizarTodasTarefas();
+            controleTarefa.Excluir(2);
+            List<Tarefa> listaAposDeletarUmaTarefa = controleTarefa.SelecionarTodosOsRegistrosDoBanco();
 
             Assert.IsTrue(listaAposDeletarUmaTarefa.Count < listaCom3Tarefas.Count);
         }

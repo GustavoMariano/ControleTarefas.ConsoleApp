@@ -1,143 +1,84 @@
 ﻿using ControleTarefas.ConsoleApp.Dominio;
-using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using ControleTarefas.ConsoleApp.Infra;
+using ControleTarefas.ConsoleApp.Infra.Comum;
 
 namespace ControleTarefas.ConsoleApp.Controlador
 {
-    public class Controlador<T> where T : EntidadeBase
+    public abstract class Controlador<T> where T : EntidadeBase
     {
+        public List<T> registros;
         public Db db = new Db();
         public Controlador()
         {
-        }
+            registros = new List<T>();
+        }       
 
-        public int InserirTarefa(Tarefa tarefa)
+        public bool InserirRegistro(T registro)
         {
-            SqlConnection conexaoComBanco = db.AbrirConexaoBanco();
-
-            SqlCommand comandoInsercao = new SqlCommand();
-            comandoInsercao.Connection = conexaoComBanco;
-
-            string sqlInsercao = db.ObtemQueryInsercaoTarefa();
-
-            sqlInsercao += @"SELECT SCOPE_IDENTITY();";
-
-            comandoInsercao.CommandText = sqlInsercao;
-            comandoInsercao.Parameters.AddWithValue("Titulo", tarefa.Titulo);
-            comandoInsercao.Parameters.AddWithValue("Prioridade", tarefa.Prioridade);
-            comandoInsercao.Parameters.AddWithValue("DataCriacao", DateTime.Now);
-            comandoInsercao.Parameters.AddWithValue("Percentual", tarefa.PercentualConcluido);
-
-            object id = comandoInsercao.ExecuteScalar();
-            tarefa.id = Convert.ToInt32(id);
-
-            conexaoComBanco.Close();
-            return tarefa.id;
-        }
-
-        public List<Tarefa> VisualizarTodasTarefas()
-        {
-            SqlConnection conexaoComBanco = db.AbrirConexaoBanco();
-
-            SqlCommand comandoSelecao = new SqlCommand();
-            comandoSelecao.Connection = conexaoComBanco;
-
-            string sqlSelecao = db.ObtemQuerySelecionarTodasTarefa();
-
-            comandoSelecao.CommandText = sqlSelecao;
-
-            SqlDataReader leitorTarefas = comandoSelecao.ExecuteReader();
-
-            List<Tarefa> tarefa = new List<Tarefa>();
-
-            while (leitorTarefas.Read())
+            if (registro.Validar())
             {
-                DateTime dataConclusao = new DateTime(0001 / 01 / 01);
-                int id = Convert.ToInt32(leitorTarefas["Id"]);
-                string titulo = Convert.ToString(leitorTarefas["Titulo"]);
-                int prioridade = Convert.ToInt32(leitorTarefas["Prioridade"]);
-                DateTime dataAbertura = Convert.ToDateTime(leitorTarefas["DataCriacao"]);
-                if (leitorTarefas["DataConclusao"] != DBNull.Value)
-                    dataConclusao = Convert.ToDateTime(leitorTarefas["DataConclusao"]);
-                int percentualConclusao = Convert.ToInt32(leitorTarefas["PercentualConclusao"]);
-
-                Tarefa selecaoTarefa = new Tarefa(id, titulo, prioridade, dataAbertura, dataConclusao, percentualConclusao);
-
-                tarefa.Add(selecaoTarefa);
+                Inserir(registro);
+                return true;
             }
-
-            conexaoComBanco.Close();
-            return tarefa;
+            return false;
         }
-        public Tarefa SelecionarPorId(int idSelecionado)
+
+        public T SelecionarRegistroPorId(int id)
         {
-            SqlConnection conexaoComBanco = db.AbrirConexaoBanco();
-
-            SqlCommand comandoSelecao = new SqlCommand();
-            comandoSelecao.Connection = conexaoComBanco;
-
-            string sqlSelecao = db.ObtemQuerySelecionarPorId();
-
-            comandoSelecao.CommandText = sqlSelecao;
-            comandoSelecao.Parameters.AddWithValue("ID", idSelecionado);
-
-            SqlDataReader leitorTarefas = comandoSelecao.ExecuteReader();
-
-            if (leitorTarefas.Read() == false)
-                return null;
-            DateTime dataConclusao = new DateTime(0001 / 01 / 01);
-            int id = Convert.ToInt32(leitorTarefas["Id"]);
-            string titulo = Convert.ToString(leitorTarefas["Titulo"]);
-            int prioridade = Convert.ToInt32(leitorTarefas["Prioridade"]);
-            DateTime dataCricao = Convert.ToDateTime(leitorTarefas["DataCriacao"]);
-            if (leitorTarefas["DataConclusao"] != DBNull.Value)
-                dataConclusao = Convert.ToDateTime(leitorTarefas["DataConclusao"]);
-            int porcentagemConclusao = Convert.ToInt32(leitorTarefas["PercentualConclusao"]);
-
-            Tarefa tarefaEditavel = new Tarefa(id, titulo, prioridade, dataCricao, dataConclusao, porcentagemConclusao);
-
-            conexaoComBanco.Close();
-
-            return tarefaEditavel;
-        }        
-
-        public void EditarTarefa(Tarefa tarefaEditavel)
-        {
-            SqlConnection conexaoComBanco = db.AbrirConexaoBanco();
-
-            SqlCommand comandoAtualizacao = new SqlCommand();
-            comandoAtualizacao.Connection = conexaoComBanco;
-            string sqlAtualizacao = db.ObtemQueryAtualizarTarefa();
-
-            comandoAtualizacao.CommandText = sqlAtualizacao;
-            comandoAtualizacao.Parameters.AddWithValue("Id", tarefaEditavel.Id);
-            comandoAtualizacao.Parameters.AddWithValue("Titulo", tarefaEditavel.Titulo);
-            comandoAtualizacao.Parameters.AddWithValue("Prioridade", tarefaEditavel.Prioridade);
-            comandoAtualizacao.Parameters.AddWithValue("DataConclusao", tarefaEditavel.DataConclusao);
-            comandoAtualizacao.Parameters.AddWithValue("PercentualConclusao", tarefaEditavel.PercentualConcluido);
-
-            comandoAtualizacao.ExecuteNonQuery();
-
-            conexaoComBanco.Close();
-        }                
-
-        public void DeletarTarefa(int idDeletar)
-        {
-            SqlConnection conexaoComBanco = db.AbrirConexaoBanco();
-
-            SqlCommand comandoExclusao = new SqlCommand();
-            comandoExclusao.Connection = conexaoComBanco;
-            string sqlExclusao = db.ObtemQueryDeletarTarefa();
-
-            comandoExclusao.CommandText = sqlExclusao;
-
-            comandoExclusao.Parameters.AddWithValue("ID", idDeletar);
-
-            comandoExclusao.ExecuteNonQuery();
-
-            conexaoComBanco.Close();
+            SelecionarTodosOsRegistrosDoBanco();
+            return registros.Find(x => x.id == id);
         }
+
+        public List<T> SelecionarTodosOsRegistrosDoBanco()
+        {
+            SqlConnection conexaoComBanco;
+            SqlCommand comando;
+            AbrirConexaoComBanco(out conexaoComBanco, out comando);
+
+            string sqlSelecao = PegarStringSelecao();
+
+            comando.CommandText = sqlSelecao;
+            SqlDataReader leitorRegistro = comando.ExecuteReader();
+
+            registros = SelecionarTodosOsRegistros(leitorRegistro);
+            conexaoComBanco.Close();
+            return registros;
+        }
+
+        private void AbrirConexaoComBanco(out SqlConnection conexaoComBanco, out SqlCommand comando)
+        {
+            conexaoComBanco = db.AbrirConexaoBanco();
+            comando = new SqlCommand();
+            comando.Connection = conexaoComBanco;
+        }
+
+        public bool EditarRegistro(int id, T registro)
+        {
+            bool idExiste = SelecionarRegistroPorId(id) != null;
+            if (idExiste && registro.Validar())
+            {
+                Editar(registro, id);
+                return true;
+            }
+            return false;
+        }
+
+        public bool ExcluirRegistro(int id)
+        {
+            bool idExiste = SelecionarRegistroPorId(id) != null;
+            if (idExiste)
+            {
+                Excluir(id);
+                return true;
+            }
+            return false;
+        }
+
+        public abstract void Inserir(T registro);
+        public abstract void Editar(T registro, int id);
+        public abstract void Excluir(int id);
+        public abstract string PegarStringSelecao();
+        public abstract List<T> SelecionarTodosOsRegistros(SqlDataReader leitorRegistro);
     }
 }

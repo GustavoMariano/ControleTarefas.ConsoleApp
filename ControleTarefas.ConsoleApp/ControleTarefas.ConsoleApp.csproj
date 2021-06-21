@@ -44,9 +44,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controlador\Controlador.cs" />
+    <Compile Include="Controlador\ControladorContato.cs" />
+    <Compile Include="Controlador\ControladorTarefa.cs" />
     <Compile Include="Dominio\Contato.cs" />
     <Compile Include="Dominio\EntidadeBase.cs" />
-    <Compile Include="Infra\Db.cs" />
+    <Compile Include="Infra\Comum\Db.cs" />
+    <Compile Include="Infra\ContatoDao.cs" />
+    <Compile Include="Infra\TarefaDao.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Dominio\Tarefa.cs" />
