@@ -20,7 +20,7 @@ namespace ControleTarefasEContatos.ConsoleApp.Infra
 		                @Email, 
 		                @Telefone,
                         @Empresa,
-                        @Contato
+                        @Cargo
 	                )";
         }
 
@@ -49,6 +49,21 @@ namespace ControleTarefasEContatos.ConsoleApp.Infra
                         TbContatos
                     WHERE 
                         [ID] = @ID";
+        }
+
+        internal string ObtemQuerySelecionarContatoPorCargo()
+        {
+            return @"SELECT 
+                        [Id], 
+		                [Nome], 
+		                [Email], 
+		                [Telefone],
+                        [Empresa],
+                        [Cargo]
+                    FROM 
+                        TbContatos
+                    WHERE 
+                        [Cargo] = @Cargo";
         }
         internal string ObtemQueryAtualizarContato()
         {

@@ -27,7 +27,6 @@ namespace ControleTarefasEContatos.ConsoleApp.Controlador
             comando.Parameters.AddWithValue("Percentual", tarefa.PercentualConcluido);
 
             comando.ExecuteScalar();
-            //tarefa.id = Convert.ToInt32(id);
 
             conexaoComBanco.Close();
         }        

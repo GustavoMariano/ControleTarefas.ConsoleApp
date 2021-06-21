@@ -18,7 +18,10 @@ namespace ControleTarefasEContatos.ConsoleApp.Infra.Comum
             SqlCommand comandoResetar = new SqlCommand();
             comandoResetar.Connection = conexaoComBanco;
 
-            string sqlResetaID = @"DELETE FROM TbTarefas; DBCC CHECKIDENT('TbTarefas', RESEED, 0)";
+            string sqlResetaID = @"DELETE FROM TbTarefas; 
+                                   DBCC CHECKIDENT('TbTarefas', RESEED, 0);
+                                   DELETE FROM TbContatos; 
+                                   DBCC CHECKIDENT('TbContatos', RESEED, 0)";
 
             comandoResetar.CommandText = sqlResetaID;
             comandoResetar.ExecuteScalar();

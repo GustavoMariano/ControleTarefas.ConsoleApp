@@ -9,6 +9,7 @@ namespace ControleTarefasEContatos.ConsoleApp.Controlador
     public class ControladorContato : Controlador<Contato>
     {
         ContatoDao contatoDao = new ContatoDao();
+
         public override void Inserir(Contato contato)
         {
             SqlConnection conexaoComBanco;
@@ -27,10 +28,20 @@ namespace ControleTarefasEContatos.ConsoleApp.Controlador
             comando.Parameters.AddWithValue("Empresa", contato.Empresa);
             comando.Parameters.AddWithValue("Cargo", contato.Cargo);
 
-            object id = comando.ExecuteScalar();
-            contato.id = Convert.ToInt32(id);
+            comando.ExecuteScalar();
 
             conexaoComBanco.Close();
+        }
+        public List<Contato> ListarPorCargo(string cargo)
+        {
+            List<Contato> listaPorCargo = new List<Contato>();
+            List<Contato> contatos = SelecionarTodosOsRegistrosDoBanco();
+            foreach (var contato in contatos)
+            {
+                if (contato.Cargo == cargo)
+                    listaPorCargo.Add(contato);
+            }
+            return listaPorCargo;
         }
 
         public override void Editar(Contato contato, int idSelecionado)

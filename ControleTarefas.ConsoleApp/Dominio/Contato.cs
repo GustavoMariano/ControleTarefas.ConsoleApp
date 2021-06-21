@@ -23,11 +23,20 @@ namespace ControleTarefasEContatos.ConsoleApp.Dominio
             this.telefone = telefone;
             this.empresa = empresa;
             this.cargo = cargo;
-        }       
+        }
+
+        public Contato(string nome, string email, string telefone, string empresa, string cargo)
+        {
+            this.nome = nome;
+            this.email = email;
+            this.telefone = telefone;
+            this.empresa = empresa;
+            this.cargo = cargo;
+        }
 
         public override bool Validar()
         {
-            if (!email.Contains("@") && !email.Contains(".com"))
+            if (!email.Contains("@") || !email.Contains(".com"))
                 return false;
             if (telefone.Length < 8)
                 return false;
