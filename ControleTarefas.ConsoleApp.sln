@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31410.357
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControleTarefas.ConsoleApp", "ControleTarefas.ConsoleApp\ControleTarefas.ConsoleApp.csproj", "{09BFD45B-CDA4-4A2E-A401-F1F2BA77F661}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControleTarefasEContatos.ConsoleApp", "ControleTarefas.ConsoleApp\ControleTarefasEContatos.ConsoleApp.csproj", "{09BFD45B-CDA4-4A2E-A401-F1F2BA77F661}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControleTarefas.Tests", "ControleTarefas.Tests\ControleTarefas.Tests.csproj", "{9EF9C15A-FE96-4FCE-B5E0-1C7B64730D83}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControleTarefasEContatos.Tests", "ControleTarefas.Tests\ControleTarefasEContatos.Tests.csproj", "{9EF9C15A-FE96-4FCE-B5E0-1C7B64730D83}"
 EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "ControleTarefas.ProjetoDB", "ControleTarefas.ProjetoDB\ControleTarefas.ProjetoDB.sqlproj", "{7A2CA5CD-4282-4E5F-B7C2-1DFC36CFFCFF}"
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "ControleTarefasEContatos.ProjetoDB", "ControleTarefas.ProjetoDB\ControleTarefasEContatos.ProjetoDB.sqlproj", "{7A2CA5CD-4282-4E5F-B7C2-1DFC36CFFCFF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

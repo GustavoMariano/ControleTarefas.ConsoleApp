@@ -1,4 +1,5 @@
-﻿namespace ControleTarefas.ConsoleApp.Tela
+﻿
+namespace ControleTarefasEContatos.ConsoleApp.Tela
 {
     internal class TelaVisualizar<Tarefa> : TelaBase
     {

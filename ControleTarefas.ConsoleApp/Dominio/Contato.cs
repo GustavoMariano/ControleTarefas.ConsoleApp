@@ -1,5 +1,5 @@
 ﻿
-namespace ControleTarefas.ConsoleApp.Dominio
+namespace ControleTarefasEContatos.ConsoleApp.Dominio
 {
     public class Contato : EntidadeBase
     {

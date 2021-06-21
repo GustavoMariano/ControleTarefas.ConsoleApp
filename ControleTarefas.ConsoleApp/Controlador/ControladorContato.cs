@@ -1,10 +1,10 @@
-﻿using ControleTarefas.ConsoleApp.Dominio;
-using ControleTarefas.ConsoleApp.Infra;
+﻿using ControleTarefasEContatos.ConsoleApp.Dominio;
+using ControleTarefasEContatos.ConsoleApp.Infra;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 
-namespace ControleTarefas.ConsoleApp.Controlador
+namespace ControleTarefasEContatos.ConsoleApp.Controlador
 {
     public class ControladorContato : Controlador<Contato>
     {

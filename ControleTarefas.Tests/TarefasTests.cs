@@ -1,20 +1,19 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ControleTarefas.ConsoleApp.Controlador;
-using ControleTarefas.ConsoleApp.Dominio;
+using ControleTarefasEContatos.ConsoleApp.Controlador;
+using ControleTarefasEContatos.ConsoleApp.Dominio;
 using System.Collections.Generic;
-using ControleTarefas.ConsoleApp.Infra.Comum;
+using ControleTarefasEContatos.ConsoleApp.Infra.Comum;
 using System;
 
-namespace ControleTarefas.Tests
+namespace ControleTarefasEContatos.Tests
 {
     [TestClass]
-    public class ControleTarefasTests
+    public class TarefasTests
     {
         Db db;
-        ControladorTarefa controleTarefa = new ControladorTarefa();
-        ControladorContato controleContato = new ControladorContato();         
+        ControladorTarefa controleTarefa = new ControladorTarefa();        
 
-        public ControleTarefasTests()
+        public TarefasTests()
         {
             controleTarefa = new ControladorTarefa();
 
@@ -22,6 +21,7 @@ namespace ControleTarefas.Tests
             db.ResetaDadosEIdDB();            
         }
 
+        #region Testes CRUD
         [TestMethod]
         public void DeveAdicionarTarefa()
         {
@@ -91,5 +91,24 @@ namespace ControleTarefas.Tests
 
             Assert.IsTrue(listaAposDeletarUmaTarefa.Count < listaCom3Tarefas.Count);
         }
+        #endregion
+
+        #region Testes Validação
+        [TestMethod]
+        public void DeveRetornarFalseTituloTarefa()
+        {
+            Tarefa tarefa = new Tarefa("", 1);
+
+            Assert.AreEqual(false, tarefa.Validar());
+        }
+
+        [TestMethod]
+        public void DeveRetornarFalsePrioridadeTarefaForaDoRange()
+        {
+            Tarefa tarefa = new Tarefa("Titulo", 0);
+
+            Assert.AreEqual(false, tarefa.Validar());
+        }
+        #endregion
     }
 }

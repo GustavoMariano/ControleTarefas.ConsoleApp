@@ -1,6 +1,6 @@
 ﻿using System.Data.SqlClient;
 
-namespace ControleTarefas.ConsoleApp.Infra.Comum
+namespace ControleTarefasEContatos.ConsoleApp.Infra.Comum
 {
     public class Db
     {
@@ -10,7 +10,7 @@ namespace ControleTarefas.ConsoleApp.Infra.Comum
 
         public void ResetaDadosEIdDB()
         {
-            string enderecoDb = EnderecoDbControleTarefas();
+            string enderecoDb = EnderecoDbControleTarefasEContatos();
             SqlConnection conexaoComBanco = new SqlConnection();
             conexaoComBanco.ConnectionString = enderecoDb;
             conexaoComBanco.Open();
@@ -24,14 +24,14 @@ namespace ControleTarefas.ConsoleApp.Infra.Comum
             comandoResetar.ExecuteScalar();
         }
 
-        private static string EnderecoDbControleTarefas()
+        private static string EnderecoDbControleTarefasEContatos()
         {
             return @"Data Source=(LocalDb)\MSSqlLocalDB;Initial Catalog=DBControleTarefas;Integrated Security=True;Pooling=False";
         }
 
         internal SqlConnection AbrirConexaoBanco()
         {
-            string enderecoDb = EnderecoDbControleTarefas();
+            string enderecoDb = EnderecoDbControleTarefasEContatos();
             SqlConnection conexaoComBanco = new SqlConnection();
             conexaoComBanco.ConnectionString = enderecoDb;
             conexaoComBanco.Open();

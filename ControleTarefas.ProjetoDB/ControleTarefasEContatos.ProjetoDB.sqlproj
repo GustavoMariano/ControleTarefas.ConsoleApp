@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <Name>ControleTarefas.ProjetoDB</Name>
+    <Name>ControleTarefasEContatos.ProjetoDB</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
     <ProjectGuid>{7a2ca5cd-4282-4e5f-b7c2-1dfc36cffcff}</ProjectGuid>

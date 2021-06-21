@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ControleTarefas.ConsoleApp.Dominio
+namespace ControleTarefasEContatos.ConsoleApp.Dominio
 {
     public class Tarefa : EntidadeBase
     {

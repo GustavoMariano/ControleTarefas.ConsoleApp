@@ -1,7 +1,7 @@
 ﻿using System;
-using ControleTarefas.ConsoleApp.Tela;
+using ControleTarefasEContatos.ConsoleApp.Tela;
 
-namespace ControleTarefas.ConsoleApp
+namespace ControleTarefasEContatos.ConsoleApp
 {
     class Program
     {

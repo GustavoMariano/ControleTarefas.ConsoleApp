@@ -1,4 +1,4 @@
-﻿namespace ControleTarefas.ConsoleApp.Tela
+﻿namespace ControleTarefasEContatos.ConsoleApp.Tela
 {
     public enum TipoMensagem
     {

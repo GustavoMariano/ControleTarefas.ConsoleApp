@@ -1,9 +1,9 @@
-﻿using ControleTarefas.ConsoleApp.Dominio;
+﻿using ControleTarefasEContatos.ConsoleApp.Dominio;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using ControleTarefas.ConsoleApp.Infra.Comum;
+using ControleTarefasEContatos.ConsoleApp.Infra.Comum;
 
-namespace ControleTarefas.ConsoleApp.Controlador
+namespace ControleTarefasEContatos.ConsoleApp.Controlador
 {
     public abstract class Controlador<T> where T : EntidadeBase
     {

@@ -1,5 +1,5 @@
 ﻿
-namespace ControleTarefas.ConsoleApp.Infra
+namespace ControleTarefasEContatos.ConsoleApp.Infra
 {
     public class TarefaDao
     {

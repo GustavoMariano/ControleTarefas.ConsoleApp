@@ -49,16 +49,17 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ControleTarefasTests.cs" />
+    <Compile Include="ContatosTests.cs" />
+    <Compile Include="TarefasTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ControleTarefas.ConsoleApp\ControleTarefas.ConsoleApp.csproj">
+    <ProjectReference Include="..\ControleTarefas.ConsoleApp\ControleTarefasEContatos.ConsoleApp.csproj">
       <Project>{09bfd45b-cda4-4a2e-a401-f1f2ba77f661}</Project>
-      <Name>ControleTarefas.ConsoleApp</Name>
+      <Name>ControleTarefasEContatos.ConsoleApp</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

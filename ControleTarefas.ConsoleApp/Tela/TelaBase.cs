@@ -1,7 +1,7 @@
-﻿using ControleTarefas.ConsoleApp.Dominio;
+﻿using ControleTarefasEContatos.ConsoleApp.Dominio;
 using System;
 
-namespace ControleTarefas.ConsoleApp.Tela
+namespace ControleTarefasEContatos.ConsoleApp.Tela
 {
     public abstract class TelaBase
     {

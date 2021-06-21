@@ -1,8 +1,8 @@
 ﻿using System;
-using ControleTarefas.ConsoleApp.Controlador;
-using ControleTarefas.ConsoleApp.Dominio;
+using ControleTarefasEContatos.ConsoleApp.Controlador;
+using ControleTarefasEContatos.ConsoleApp.Dominio;
 
-namespace ControleTarefas.ConsoleApp.Tela
+namespace ControleTarefasEContatos.ConsoleApp.Tela
 {
     public class TelaAdicionar<TipoTarefa> : TelaBase
     {
