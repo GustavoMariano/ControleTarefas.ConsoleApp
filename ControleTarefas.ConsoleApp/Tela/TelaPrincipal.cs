@@ -4,40 +4,27 @@ using ControleTarefasEContatos.ConsoleApp.Dominio;
 
 namespace ControleTarefasEContatos.ConsoleApp.Tela
 {
-    public class TelaPrincipal : TelaBase
+    class TelaPrincipal : TelaBase
     {
-        private readonly Controlador<Tarefa> controlador;
+        static Controlador<Tarefa> controladorTarefa = new ControladorTarefa();
+        static Controlador<Contato> controladorContato = new ControladorContato();
 
-        private readonly TelaAdicionar<Tarefa> telaAdicionar;
-        private readonly TelaVisualizar<Tarefa> telaVisualizar;
-        private readonly TelaEditar<Tarefa> telaEditar;        
-        private readonly TelaExcluir<Tarefa> telaExcluir;
+        static TelaTarefa telaTarefa = new TelaTarefa("Controle de Tarefas\n-------------------\n");
+        static TelaContato telaContato = new TelaContato("Controle de Contatos\n-------------------\n");
 
-        public TelaPrincipal() : base("Tela Principal")
+        public TelaPrincipal(string titulo) : base(titulo) { }
+
+        public TelaBase ObterOpcao(string titulo)
         {
-            //controlador = new Controlador<Tarefa>();
-
-            telaAdicionar = new TelaAdicionar<Tarefa>("Adicionar Tarefa");
-            telaVisualizar = new TelaVisualizar<Tarefa>("Visualizar Tarefas");
-            telaEditar = new TelaEditar<Tarefa>("Editar Tarefa");
-            telaExcluir = new TelaExcluir<Tarefa>("Encerrar Tarefa");
-        }
-
-        public TelaBase ObterTela()
-        {
-            ConfigurarTela("Escolha uma opção: ");
-
             TelaBase telaSelecionada = null;
-            string opcao = "0";
+            string opcao;
             do
             {
                 Console.Clear();
-
-                Console.WriteLine("Digite 1 para inserir nova tarefa");
-                Console.WriteLine("Digite 2 para visualizar tarefas");
-                Console.WriteLine("Digite 3 para editar tarefa");
-                Console.WriteLine("Digite 4 para excluir tarefa");
-                Console.WriteLine("Digite S para Voltar");
+                Console.WriteLine("Menu Principal" + "\n---------------\n");
+                Console.WriteLine("Digite 1 para o controle de tarefas");
+                Console.WriteLine("Digite 2 para o controle de contatos");
+                Console.WriteLine("Digite s para Voltar");
                 Console.WriteLine();
                 Console.Write("Opção: ");
                 opcao = Console.ReadLine();
@@ -47,13 +34,11 @@ namespace ControleTarefasEContatos.ConsoleApp.Tela
 
                 switch (opcao)
                 {
-                    case "1": telaSelecionada = telaAdicionar; break;
-                    case "2": telaSelecionada = telaVisualizar; break;
-                    case "3": telaSelecionada = telaEditar; break;
-                    case "4": telaSelecionada = telaExcluir; break;
+                    case "1": telaSelecionada = telaTarefa; break;
+                    case "2": telaSelecionada = telaContato; break;
                     default:
                         break;
-                }              
+                }
 
             } while (OpcaoInvalida(opcao));
 
@@ -62,9 +47,11 @@ namespace ControleTarefasEContatos.ConsoleApp.Tela
 
         private bool OpcaoInvalida(string opcao)
         {
-            if (opcao != "1" && opcao != "2" && opcao != "3" && opcao != "4" && opcao != "S" && opcao != "s")
+            if (opcao != "1" && opcao != "2" && opcao != "S" && opcao != "s")
             {
-                ApresentarMensagem("Opção inválida", TipoMensagem.Erro);
+                Console.WriteLine("Opção inválida");
+                Console.ReadLine();
+                Console.Clear();
                 return true;
             }
             else

@@ -1,5 +1,4 @@
-﻿using ControleTarefasEContatos.ConsoleApp.Dominio;
-using System;
+﻿using System;
 
 namespace ControleTarefasEContatos.ConsoleApp.Tela
 {
@@ -14,71 +13,45 @@ namespace ControleTarefasEContatos.ConsoleApp.Tela
             titulo = tit;
         }
 
-        public virtual Tarefa ObterOpcao()
+        public string ObterOpcao()
         {
-            Tarefa tarefa = new Tarefa(" ", 0);
-            //Console.WriteLine("Digite 1 para inserir nova tarefa");
-            //Console.WriteLine("Digite 2 para visualizar tarefas");
-            //Console.WriteLine("Digite 3 para editar tarefa");
-            //Console.WriteLine("Digite 4 para excluir tarefa");
-
-            //Console.WriteLine("Digite S para Voltar");
-            //Console.WriteLine(); 
-
-            //Console.Write("Opção: ");
-            //string opcao = Console.ReadLine();
-
-            return tarefa;
-        }
-
-        protected void MontarCabecalhoTabela(string configuracaoColunasTabela, params object[] colunas)
-        {
-            Console.ForegroundColor = ConsoleColor.Cyan;
-
-            Console.WriteLine(configuracaoColunasTabela, colunas);
-
-            Console.WriteLine("-------------------------------------------------------------------------------------------------------------------");
-
-            Console.ResetColor();
-        }
-
-        protected void ApresentarMensagem(string mensagem, TipoMensagem tm)
-        {
-            switch (tm)
+            string opcao;
+            do
             {
-                case TipoMensagem.Sucesso:
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    break;
+                Console.Clear();
 
-                case TipoMensagem.Atencao:
-                    Console.ForegroundColor = ConsoleColor.DarkYellow;
-                    break;
+                Console.WriteLine("Digite 1 para inserir novo registro");
+                Console.WriteLine("Digite 2 para visualizar registros");
+                Console.WriteLine("Digite 3 para editar registro");
+                Console.WriteLine("Digite 4 para excluir registro");
+                Console.WriteLine("Digite S para Voltar");
+                Console.WriteLine();
 
-                case TipoMensagem.Erro:
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    break;
+                Console.Write("Opção: ");
+                opcao = Console.ReadLine();
 
-                default:
-                    break;
-            }
-
-            Console.WriteLine();
-            Console.WriteLine(mensagem);
-            Console.ResetColor();
-            Console.ReadLine();
-        }
-
-        protected void ConfigurarTela(string subtitulo)
-        {
+            } while (ValidaOpcao(opcao));
             Console.Clear();
-
-            Console.WriteLine(titulo);
-
-            Console.WriteLine();
-
-            Console.WriteLine(subtitulo);
-
-            Console.WriteLine();
+            return opcao;
         }
+
+        public virtual void InserirNovoRegistro() { }
+        public virtual void VisualizarRegistros() { }
+        public virtual void EditarRegistro() { }
+        public virtual void ExcluirRegistro() { }
+
+        #region Métodos privados
+        private static bool ValidaOpcao(string opcao)
+        {
+            if (opcao != "1" && opcao != "2" && opcao != "3" && opcao != "4" && opcao != "s" && opcao != "S")
+            {
+                Console.WriteLine("Opção inválida, tente novamente!!");
+                Console.ReadLine();
+                return true;
+            }
+            else
+                return false;
+        }
+        #endregion
     }
 }

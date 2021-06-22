@@ -4,22 +4,36 @@ using ControleTarefasEContatos.ConsoleApp.Tela;
 namespace ControleTarefasEContatos.ConsoleApp
 {
     class Program
-    {
-        static TelaPrincipal telaPrincipal = new TelaPrincipal();
+    {        
         static void Main(string[] args)
         {
-            //while (true)
-            //{
-            //    TelaBase telaSelecionada = telaPrincipal.ObterTela();
+            TelaPrincipal telaPrincipal = new TelaPrincipal("");
 
-            //    if (telaSelecionada == null)
-            //        break;
+            while (true)
+            {
+                TelaBase telaSelecionada = (TelaBase)telaPrincipal.ObterOpcao("");
 
-            //    Console.Clear();
+                if (telaSelecionada == null)
+                    break;
 
-            //    string opcao = telaSelecionada.ObterOpcao();
+                string opcao = "";
 
-            //}
+                Console.Clear();
+
+                Console.WriteLine(((TelaBase)telaSelecionada).Titulo);
+
+                opcao = telaSelecionada.ObterOpcao();
+
+                switch (opcao)
+                {
+                    case "1": telaSelecionada.InserirNovoRegistro(); break;
+                    case "2": telaSelecionada.VisualizarRegistros(); break;
+                    case "3": telaSelecionada.EditarRegistro(); break;
+                    case "4": telaSelecionada.ExcluirRegistro(); break;
+                    default:
+                        break;
+                }
+            }
         }
     }
 }

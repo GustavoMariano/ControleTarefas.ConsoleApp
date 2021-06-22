@@ -54,12 +54,10 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Dominio\Tarefa.cs" />
-    <Compile Include="Tela\TelaAdicionar.cs" />
     <Compile Include="Tela\TelaBase.cs" />
-    <Compile Include="Tela\TelaEditar.cs" />
-    <Compile Include="Tela\TelaExcluir.cs" />
+    <Compile Include="Tela\TelaContato.cs" />
     <Compile Include="Tela\TelaPrincipal.cs" />
-    <Compile Include="Tela\TelaVisualizar.cs" />
+    <Compile Include="Tela\TelaTarefa.cs" />
     <Compile Include="Tela\TipoMensagem.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -3,6 +3,7 @@ using ControleTarefasEContatos.ConsoleApp.Infra;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Linq;
 
 namespace ControleTarefasEContatos.ConsoleApp.Controlador
 {
@@ -20,7 +21,7 @@ namespace ControleTarefasEContatos.ConsoleApp.Controlador
             sqlInsercao += @"SELECT SCOPE_IDENTITY();";
 
             comando.CommandText = sqlInsercao;
-            
+
             comando.Parameters.AddWithValue("Titulo", tarefa.Titulo);
             comando.Parameters.AddWithValue("Prioridade", tarefa.Prioridade);
             comando.Parameters.AddWithValue("DataCriacao", tarefa.DataCriacao);
@@ -29,7 +30,7 @@ namespace ControleTarefasEContatos.ConsoleApp.Controlador
             comando.ExecuteScalar();
 
             conexaoComBanco.Close();
-        }        
+        }
 
         public override void Editar(Tarefa tarefa, int idSelecionado)
         {
@@ -76,7 +77,7 @@ namespace ControleTarefasEContatos.ConsoleApp.Controlador
                 int id = Convert.ToInt32(leitorRegistro["Id"]);
                 string titulo = Convert.ToString(leitorRegistro["Titulo"]);
                 int prioridade = Convert.ToInt32(leitorRegistro["Prioridade"]);
-                DateTime dataDeCriacao = Convert.ToDateTime(leitorRegistro["DataCriacao"]);                
+                DateTime dataDeCriacao = Convert.ToDateTime(leitorRegistro["DataCriacao"]);
                 if (leitorRegistro["DataConclusao"] != DBNull.Value)
                     dataConclusao = Convert.ToDateTime(leitorRegistro["DataConclusao"]);
                 int percentualConclusao = Convert.ToInt32(leitorRegistro["PercentualConclusao"]);
@@ -85,7 +86,13 @@ namespace ControleTarefasEContatos.ConsoleApp.Controlador
                 tarefas.Add(tarefa);
             }
             return tarefas;
-        }        
+        }
+        //public List<Tarefa> SelecionarEOrdenarTarefasAbertasPorPrioridade()
+        //{
+        //    registros = SelecionarTodosOsRegistrosDoBanco();
+        //    registros.OrderBy(x => x.Prioridade == 3).ThenBy(x => x.Prioridade == 2).ThenBy(x => x.Prioridade == 1);
+        //    return registros;
+        //}
 
         public override string PegarStringSelecao()
         {
@@ -93,6 +100,10 @@ namespace ControleTarefasEContatos.ConsoleApp.Controlador
         }
 
         #region Métodos Privados
+        private void OrdenaTarefasEncerradasPorPrioridade()
+        {
+            registros.OrderBy(x => x.Prioridade == 3 && (x.PercentualConcluido >= 100 || x.DataConclusao > DateTime.MinValue)).ThenBy(x => x.Prioridade == 2 && (x.PercentualConcluido > 99 || x.DataConclusao > DateTime.MinValue)).ThenBy(x => x.Prioridade == 1 && (x.PercentualConcluido > 99 || x.DataConclusao > DateTime.MinValue));
+        }
         private void AbrirConexaoComBanco(out SqlConnection conexaoComBanco, out SqlCommand comando)
         {
             conexaoComBanco = db.AbrirConexaoBanco();
