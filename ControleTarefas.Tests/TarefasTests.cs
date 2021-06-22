@@ -59,30 +59,50 @@ namespace ControleTarefasEContatos.Tests
             Assert.AreEqual(1, tarefaSelecionada.id);
         }
 
-        //[TestMethod]
-        //public void DeveSelecionarTarefasAbertasPorPrioridade()
-        //{
-        //    DateTime encerramento = new DateTime(2021, 12, 31);
-        //    Tarefa tarefa1 = new Tarefa("Media - Aberta", 2);
-        //    controleTarefa.Inserir(tarefa1);
-        //    Tarefa tarefa2 = new Tarefa(0, "Alta - Fechada", 3, encerramento, DateTime.Now, 100);
-        //    controleTarefa.Inserir(tarefa2);
-        //    Tarefa tarefa3 = new Tarefa("Media - Aberta", 2);
-        //    controleTarefa.Inserir(tarefa3);
-        //    Tarefa tarefa4 = new Tarefa("Baixa - Aberta", 1);
-        //    controleTarefa.Inserir(tarefa4);
-        //    Tarefa tarefa5 = new Tarefa("Alta - Aberta", 3);
-        //    controleTarefa.Inserir(tarefa5);
+        [TestMethod]
+        public void DeveSelecionarTarefasFinalizadasPorPrioridade()
+        {
+            DateTime encerramento = new DateTime(2021, 12, 31);
+            Tarefa tarefa1 = new Tarefa("Media - Aberta", 2);
+            controleTarefa.Inserir(tarefa1);
+            Tarefa tarefa2 = new Tarefa(0, "Alta - Fechada", 3, encerramento, DateTime.Now, 100);
+            controleTarefa.Inserir(tarefa2);
+            Tarefa tarefa3 = new Tarefa("Media - Aberta", 2);
+            controleTarefa.Inserir(tarefa3);
+            Tarefa tarefa4 = new Tarefa(0,"Baixa - Fechada", 1, encerramento, DateTime.Now, 100);
+            controleTarefa.Inserir(tarefa4);
+            Tarefa tarefa5 = new Tarefa("Alta - Aberta", 3);
+            controleTarefa.Inserir(tarefa5);
 
-        //    List<Tarefa> tarefasTotalNoBanco = controleTarefa.SelecionarTodosOsRegistrosDoBanco();
+            List<Tarefa> tarefasTotalNoBanco = controleTarefa.SelecionarTodosOsRegistrosDoBanco();
 
-        //    Assert.AreEqual(5, tarefasTotalNoBanco.Count);
+            Assert.AreEqual(5, tarefasTotalNoBanco.Count);
 
-        //    List<Tarefa> tarefasAbertasEmOrdemDePrioridade = controleTarefa.SelecionarEOrdenarTarefasAbertasPorPrioridade();
-        //    //Assert.AreEqual(4,tarefasAbertasEmOrdemDePrioridade.Count);
+            List<Tarefa> tarefasFechadasEmOrdemDePrioridade = controleTarefa.SelecionarTarefasFinalizadas();
+            Assert.AreEqual(2,tarefasFechadasEmOrdemDePrioridade.Count);
+        }
 
-        //    //Assert.AreEqual(1, tarefasAbertasEmOrdemDePrioridade.FindIndex(0,1, tarefa));
-        //}
+        [TestMethod]
+        public void DeveSelecionarTarefasAbertasPorPrioridade()
+        {
+            DateTime encerramento = new DateTime(2021, 12, 31);
+            Tarefa tarefa1 = new Tarefa("Media - Aberta", 2);
+            controleTarefa.Inserir(tarefa1);
+            Tarefa tarefa2 = new Tarefa(0, "Alta - Fechada", 3, encerramento, DateTime.Now, 100);
+            controleTarefa.Inserir(tarefa2);
+            Tarefa tarefa3 = new Tarefa("Media - Aberta", 2);
+            controleTarefa.Inserir(tarefa3);
+            Tarefa tarefa4 = new Tarefa(0, "Baixa - Fechada", 1, encerramento, DateTime.Now, 100);
+            controleTarefa.Inserir(tarefa4);
+            Tarefa tarefa5 = new Tarefa("Alta - Aberta", 3);
+            controleTarefa.Inserir(tarefa5);
+
+            List<Tarefa> tarefasTotalNoBanco = controleTarefa.SelecionarTodosOsRegistrosDoBanco();
+            Assert.AreEqual(5, tarefasTotalNoBanco.Count);
+
+            List<Tarefa> tarefasFechadasEmOrdemDePrioridade = controleTarefa.SelecionarTarefasAbertas();
+            Assert.AreEqual(3, tarefasFechadasEmOrdemDePrioridade.Count);
+        }
 
         [TestMethod]
         public void DeveEditarUmaTarefa()

@@ -58,7 +58,6 @@
     <Compile Include="Tela\TelaContato.cs" />
     <Compile Include="Tela\TelaPrincipal.cs" />
     <Compile Include="Tela\TelaTarefa.cs" />
-    <Compile Include="Tela\TipoMensagem.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

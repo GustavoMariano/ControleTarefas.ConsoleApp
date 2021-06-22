@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using ControleTarefasEContatos.ConsoleApp.Infra.Comum;
+using System;
 
 namespace ControleTarefasEContatos.ConsoleApp.Controlador
 {
@@ -30,7 +31,7 @@ namespace ControleTarefasEContatos.ConsoleApp.Controlador
             return registros.Find(x => x.id == id);
         }
 
-        public List<T> SelecionarTodosOsRegistrosDoBanco()
+        public List<T> SelecionarTodosOsRegistrosDoBanco(string complementoDaQuery = "")
         {
             SqlConnection conexaoComBanco;
             SqlCommand comando;
@@ -79,6 +80,7 @@ namespace ControleTarefasEContatos.ConsoleApp.Controlador
         public abstract void Editar(T registro, int id);
         public abstract void Excluir(int id);
         public abstract string PegarStringSelecao();
+
         public abstract List<T> SelecionarTodosOsRegistros(SqlDataReader leitorRegistro);
     }
 }

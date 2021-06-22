@@ -1,4 +1,6 @@
 ﻿
+using System;
+
 namespace ControleTarefasEContatos.ConsoleApp.Infra
 {
     public class TarefaDao
@@ -65,6 +67,16 @@ namespace ControleTarefasEContatos.ConsoleApp.Infra
             return @"DELETE FROM TbTarefas 	                
 	                WHERE 
 		                [ID] = @ID";
+        }
+
+        internal string ObtemQuerySelecionarTarefasFinalizadas()
+        {
+            return @"select * from TbTarefas where PercentualConclusao >= 100 order by Prioridade";
+        }
+
+        internal string ObtemQuerySelecionarTarefasEmAberto()
+        {
+            return @"select * from TbTarefas where PercentualConclusao < 100 order by Prioridade";
         }
         #endregion
     }
