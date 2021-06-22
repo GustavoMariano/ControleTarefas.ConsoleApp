@@ -97,6 +97,73 @@ namespace ControleTarefasEContatos.ConsoleApp.Tela
             Console.ReadLine();
         }
 
+        public override void EditarRegistro()
+        {
+            Console.Clear();
+
+            VisualizarTodosOsContatos();
+
+            Console.WriteLine();
+
+            List<Contato> todosContatos = controlador.SelecionarTodosOsRegistrosDoBanco();
+            if (todosContatos.Count == 0)
+            {
+                Console.ReadLine();
+                return;
+            }
+
+            Console.Write("Digite o ID da contato que deseja editar: ");
+            int idSelecionado;
+            Int32.TryParse(Console.ReadLine(), out idSelecionado);
+
+            Contato ContatoSelecionado = controlador.SelecionarRegistroPorId(idSelecionado);
+
+            if (ContatoSelecionado == null)
+            {
+                Console.WriteLine("ID não encontrado, tente novamente!!");
+                Console.ReadLine();
+            }
+            else
+            {
+                string resultadoValidacao = (GravarContato(idSelecionado));
+
+                if (resultadoValidacao == "Contato cadastrado com sucesso!!")
+                {
+                    Console.WriteLine("Contato editado com sucesso");
+                    Console.ReadLine();
+                    Console.Clear();
+                }
+                else
+                    Console.WriteLine(resultadoValidacao);
+            }
+        }
+        public override void ExcluirRegistro()
+        {
+            Console.Clear();
+
+            VisualizarTodosOsContatos();
+
+            Console.WriteLine();
+
+            Console.Write("Digite o ID da contato que deseja excluir: ");
+            int idSelecionado;
+            Int32.TryParse(Console.ReadLine(), out idSelecionado);
+
+            Contato contato = controlador.SelecionarRegistroPorId(idSelecionado);
+
+            if (contato.Nome == null)
+            {
+                Console.WriteLine("Id não encontrado, tente novamente!!");
+                Console.ReadLine();
+            }
+            else
+            {
+                controlador.Excluir(idSelecionado);
+                Console.WriteLine("Registro excluído com sucesso");
+                Console.ReadLine();
+            }
+        }
+
         private string GravarContato(int id = 0)
         {
             Contato contato;
@@ -131,7 +198,7 @@ namespace ControleTarefasEContatos.ConsoleApp.Tela
         {
             Console.ForegroundColor = ConsoleColor.Red;
 
-            Console.WriteLine(configuracaoColunasTabela, "Id", "Titulo", "Prioridade", "% Conclusão", "Data Criação", "Data Conclusão");
+            Console.WriteLine(configuracaoColunasTabela, "Id", "Nome", "Email", "Telefone", "Empresa", "Cargo");
 
             Console.WriteLine("---------------------------------------------------------------------------------------------------------");
 
