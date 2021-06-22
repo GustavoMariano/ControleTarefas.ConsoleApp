@@ -20,7 +20,7 @@ namespace ControleTarefasEContatos.ConsoleApp.Tela
 
             string resultadoValidacao = "a";
 
-            while (resultadoValidacao != "Contato cadastrado com sucesso!!")
+            while (resultadoValidacao != "Sucesso!!")
             {
                 resultadoValidacao = (GravarContato());
                 Console.WriteLine(resultadoValidacao);
@@ -51,23 +51,16 @@ namespace ControleTarefasEContatos.ConsoleApp.Tela
 
             MontarCabecalhoTabela(configuracaColunasTabela);
 
-            List<Contato> todosContatos = controlador.SelecionarTodosOsRegistrosDoBanco();
+            ControladorContato controladorContato = new ControladorContato();
+            List<Contato> listaPorCargo = controladorContato.ListarPorCargo(cargo);
 
-            List<Contato> contatosPorCargo = new List<Contato>();
-
-            foreach (var item in todosContatos)
-            {
-                if (item.Cargo == cargo)
-                    contatosPorCargo.Add(item);
-            }
-
-            if (todosContatos.Count < 1)
+            if (listaPorCargo.Count < 1)
             {
                 Console.WriteLine("Nenhuma tarefa criada até o momento!!");
                 return;
             }
 
-            foreach (var tarefa in todosContatos)
+            foreach (var tarefa in listaPorCargo)
             {
                 Console.WriteLine(configuracaColunasTabela, tarefa.id, tarefa.Nome, tarefa.Email, tarefa.Telefone, tarefa.Empresa, tarefa.Cargo);
             }
@@ -183,12 +176,12 @@ namespace ControleTarefasEContatos.ConsoleApp.Tela
             if (id != 0)
             {
                 controlador.Editar(contato, id);
-                return "Contato editado com sucesso!!";
+                return "Sucesso!!";
             }
             else if(contato.Validar())
             {
                 controlador.Inserir(contato);
-                return "Contato criado com sucesso!!";
+                return "Sucesso!!";
             }  
             else
                 return "Contato inválido";

@@ -3,7 +3,6 @@ using ControleTarefasEContatos.ConsoleApp.Infra;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
 
 namespace ControleTarefasEContatos.ConsoleApp.Controlador
 {
@@ -31,7 +30,6 @@ namespace ControleTarefasEContatos.ConsoleApp.Controlador
 
             conexaoComBanco.Close();
         }
-
         public override void Editar(Tarefa tarefa, int idSelecionado)
         {
             SqlConnection conexaoComBanco;
@@ -52,7 +50,6 @@ namespace ControleTarefasEContatos.ConsoleApp.Controlador
 
             conexaoComBanco.Close();
         }
-
         public override void Excluir(int id)
         {
             SqlConnection conexaoComBanco;
@@ -67,7 +64,6 @@ namespace ControleTarefasEContatos.ConsoleApp.Controlador
 
             conexaoComBanco.Close();
         }
-
         public override List<Tarefa> SelecionarTodosOsRegistros(SqlDataReader leitorRegistro)
         {
             List<Tarefa> tarefas = new List<Tarefa>();
@@ -87,12 +83,10 @@ namespace ControleTarefasEContatos.ConsoleApp.Controlador
             }
             return tarefas;
         }
-
         public override string PegarStringSelecao()
         {
             return tarefaDao.ObtemQuerySelecionarTodasTarefa();
         }
-
         public List<Tarefa> SelecionarTarefasFinalizadas()
         {
             SqlConnection conexaoComBanco;
@@ -122,7 +116,6 @@ namespace ControleTarefasEContatos.ConsoleApp.Controlador
             }
             return tarefas;
         }
-
         public List<Tarefa> SelecionarTarefasAbertas()
         {
             SqlConnection conexaoComBanco;
@@ -152,7 +145,6 @@ namespace ControleTarefasEContatos.ConsoleApp.Controlador
             }
             return tarefas;
         }
-
         #region Métodos Privados
         private void AbrirConexaoComBanco(out SqlConnection conexaoComBanco, out SqlCommand comando)
         {

@@ -43,7 +43,6 @@ namespace ControleTarefasEContatos.ConsoleApp.Controlador
             }
             return listaPorCargo;
         }
-
         public override void Editar(Contato contato, int idSelecionado)
         {
             SqlConnection conexaoComBanco;
@@ -64,7 +63,6 @@ namespace ControleTarefasEContatos.ConsoleApp.Controlador
 
             conexaoComBanco.Close(); ;
         }
-
         public override void Excluir(int id)
         {
             SqlConnection conexaoComBanco;
@@ -79,7 +77,6 @@ namespace ControleTarefasEContatos.ConsoleApp.Controlador
 
             conexaoComBanco.Close();
         }        
-
         public override List<Contato> SelecionarTodosOsRegistros(SqlDataReader leitorRegistro)
         {
             List<Contato> contatos = new List<Contato>();
@@ -97,12 +94,10 @@ namespace ControleTarefasEContatos.ConsoleApp.Controlador
             }
             return contatos;
         }
-
         public override string PegarStringSelecao()
         {
             return contatoDao.ObtemQuerySelecionarTodosContatos();
         }
-
         #region Métodos Privados
         private void AbrirConexaoComBanco(out SqlConnection conexaoComBanco, out SqlCommand comando)
         {
