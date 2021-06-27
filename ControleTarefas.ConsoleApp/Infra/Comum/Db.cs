@@ -20,6 +20,8 @@ namespace ControleTarefasEContatos.ConsoleApp.Infra.Comum
 
             string sqlResetaID = @"DELETE FROM TbTarefas; 
                                    DBCC CHECKIDENT('TbTarefas', RESEED, 0);
+                                   DELETE FROM TbCompromissos; 
+                                   DBCC CHECKIDENT('TbCompromissos', RESEED, 0);
                                    DELETE FROM TbContatos; 
                                    DBCC CHECKIDENT('TbContatos', RESEED, 0)";
 

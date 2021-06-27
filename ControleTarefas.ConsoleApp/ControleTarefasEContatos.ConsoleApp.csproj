@@ -44,10 +44,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controlador\Controlador.cs" />
+    <Compile Include="Controlador\ControladorCompromisso.cs" />
     <Compile Include="Controlador\ControladorContato.cs" />
     <Compile Include="Controlador\ControladorTarefa.cs" />
+    <Compile Include="Dominio\Compromisso.cs" />
     <Compile Include="Dominio\Contato.cs" />
     <Compile Include="Dominio\EntidadeBase.cs" />
+    <Compile Include="Infra\CompromissoDao.cs" />
     <Compile Include="Infra\Comum\Db.cs" />
     <Compile Include="Infra\ContatoDao.cs" />
     <Compile Include="Infra\TarefaDao.cs" />

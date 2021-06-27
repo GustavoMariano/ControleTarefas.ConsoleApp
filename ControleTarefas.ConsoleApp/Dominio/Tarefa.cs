@@ -30,7 +30,6 @@ namespace ControleTarefasEContatos.ConsoleApp.Dominio
             this.dataConclusao = dataConclusao;
             this.percentualConcluido = percentualConcluido;
         }
-
         public override bool Validar()
         {
             if (titulo.Length == 0)

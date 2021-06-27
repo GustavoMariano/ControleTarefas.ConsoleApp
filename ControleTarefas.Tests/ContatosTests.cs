@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using ControleTarefasEContatos.ConsoleApp.Infra.Comum;
 using System;
 
-namespace ControleTarefas.Tests
+namespace ControleTarefasEContatos.Tests
 {
     [TestClass]
     public class ContatosTests

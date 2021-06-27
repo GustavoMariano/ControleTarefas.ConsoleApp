@@ -4,7 +4,6 @@ using ControleTarefasEContatos.ConsoleApp.Dominio;
 using System.Collections.Generic;
 using ControleTarefasEContatos.ConsoleApp.Infra.Comum;
 using System;
-using System.Linq;
 
 namespace ControleTarefasEContatos.Tests
 {
@@ -12,7 +11,7 @@ namespace ControleTarefasEContatos.Tests
     public class TarefasTests
     {
         Db db;
-        ControladorTarefa controleTarefa = new ControladorTarefa();        
+        ControladorTarefa controleTarefa;        
 
         public TarefasTests()
         {
