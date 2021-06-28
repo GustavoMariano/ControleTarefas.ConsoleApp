@@ -16,22 +16,20 @@ namespace ControleTarefasEContatos.ConsoleApp.Controlador
             AbrirConexaoComBanco(out conexaoComBanco, out comando);
             string sqlInsercao = "";
 
-            if (compromisso.IdContato == 0)
-                sqlInsercao = compromissoDao.ObtemQueryInsercaoCompromissoSemContato();
-            else
-            {
-                sqlInsercao = compromissoDao.ObtemQueryInsercaoCompromissoComContato();
-                comando.Parameters.AddWithValue("Contato_Id", compromisso.IdContato);
-            }
+            sqlInsercao = compromissoDao.ObtemQueryInsercaoCompromisso();            
 
             sqlInsercao += @"SELECT SCOPE_IDENTITY();";
             comando.CommandText = sqlInsercao;
 
             comando.Parameters.AddWithValue("Assunto", compromisso.Assunto);
-            comando.Parameters.AddWithValue("Localizacao", compromisso.Localizacao);            
+            comando.Parameters.AddWithValue("Localizacao", compromisso.Localizacao);
             comando.Parameters.AddWithValue("DataInicio", compromisso.DataInicioCompromisso);
             comando.Parameters.AddWithValue("DataFinal", compromisso.DataFinalCompromisso);
             comando.Parameters.AddWithValue("Link", compromisso.LinkReuniao);
+            if (compromisso.IdContato != 0)
+                comando.Parameters.AddWithValue("ContatoId", compromisso.IdContato);
+            else
+                comando.Parameters.AddWithValue("ContatoId", DBNull.Value);
 
             object id = comando.ExecuteScalar();
 

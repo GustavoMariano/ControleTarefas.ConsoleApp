@@ -1,9 +1,10 @@
-﻿using System;
+﻿using ControleTarefasEContatos.ConsoleApp.Controlador;
+using System;
 
 namespace ControleTarefasEContatos.ConsoleApp.Dominio
 {
     public class Compromisso : EntidadeBase
-    {
+    {  
         private string assunto;
         private string localizacao;
         private int? idContato = 0;
@@ -42,6 +43,14 @@ namespace ControleTarefasEContatos.ConsoleApp.Dominio
                 return false;
             if (localizacao.Length == 0 && linkReuniao.Length == 0)
                 return false;
+
+            Controlador<Compromisso> controlador = new ControladorCompromisso();
+            foreach (var item in controlador.SelecionarTodosOsRegistrosDoBanco())
+            {
+                bool dataJaMarcada =  this.DataInicioCompromisso >= item.DataInicioCompromisso && this.DataInicioCompromisso <= item.DataFinalCompromisso;
+                if (dataJaMarcada)
+                    return false;
+            }
             return true;
         }
     }

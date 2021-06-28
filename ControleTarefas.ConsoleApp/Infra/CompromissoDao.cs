@@ -9,27 +9,7 @@ namespace ControleTarefas.ConsoleApp.Infra
     class CompromissoDao
     {
         #region Scripts
-        internal string ObtemQueryInsercaoCompromissoSemContato()
-        {
-            return @"INSERT INTO TbCompromissos
-	                (
-		                [Assunto], 
-		                [Localizacao],
-                        [Link],
-                        [DataInicio],
-                        [DataFinal]
-	                ) 
-	                VALUES
-	                (
-                        @Assunto, 
-		                @Localizacao, 
-		                @Link,
-                        @DataInicio,
-                        @DataFinal
-	                )";
-        }
-
-        internal string ObtemQueryInsercaoCompromissoComContato()
+        internal string ObtemQueryInsercaoCompromisso()
         {
             return @"INSERT INTO TbCompromissos
 	                (
@@ -47,7 +27,7 @@ namespace ControleTarefas.ConsoleApp.Infra
 		                @Link,
                         @DataInicio,
                         @DataFinal,
-                        @Contato_Id
+                        @ContatoId
 	                )";
         }
 
@@ -63,21 +43,24 @@ namespace ControleTarefas.ConsoleApp.Infra
                         [TbContatos_Id], Nome
                     FROM 
                         TbCompromissos comp
-                        INNER JOIN TbContatos cont
+                        LEFT JOIN TbContatos cont
                         ON TbContatos_Id = cont.Id
                         ";
         }
         internal string ObtemQuerySelecionarCompromissoPorId()
         {
             return @"SELECT 
+                        comp.[Id],
                         [Assunto], 
 		                [Localizacao],
                         [Link],
                         [DataInicio],
                         [DataFinal],
-                        [TbContato_Id]
+                        [TbContato_Id], Nome
                     FROM 
-                        TbCompromissos
+                        TbCompromissos comp
+                        LEFT JOIN TbContatos cont
+                        ON TbContatos_Id = cont.Id
                     WHERE 
                         [ID] = @ID";
         }

@@ -23,7 +23,7 @@ namespace ControleTarefasEContatos.Tests
 
         #region Testes CRUD
         [TestMethod]
-        public void DeveAdicionarCompromisso()
+        public void DeveAdicionarCompromissoComContato()
         {
             ControladorContato controladorContato = new ControladorContato();
             Contato contato = new Contato("Gustavo", "gustavomariano@ndd.tech", "3251-8000", "ndd", "dev");
@@ -40,6 +40,16 @@ namespace ControleTarefasEContatos.Tests
 
             Assert.AreEqual(1, listaQtdCompromissoBanco.Count);
             Assert.AreEqual("Gustavo", listaQtdCompromissoBanco[0].Nome);
+        }
+        [TestMethod]
+        public void DeveAdicionarCompromissoSemContato()
+        {
+            Compromisso compromisso = new Compromisso(0, "Assunto 1", "Localizacao 1", 0, DateTime.Today, DateTime.Today.AddDays(2), "", "");
+            controladorCompromisso.Inserir(compromisso);
+
+            List<Compromisso> listaQtdCompromissoBanco = controladorCompromisso.SelecionarTodosOsRegistrosDoBanco();
+
+            Assert.AreEqual(1, listaQtdCompromissoBanco.Count);
         }
         [TestMethod]
         public void DeveEditarCompromisso()
@@ -111,6 +121,17 @@ namespace ControleTarefasEContatos.Tests
         public void DeveRetornarFalseDataFinalMinima()
         {
             Compromisso compromisso = new Compromisso(0, "Assunto", "Localizacao", 0, DateTime.Now, DateTime.MinValue, "Link");
+
+            Assert.AreEqual(false, compromisso.Validar());
+        }
+
+        [TestMethod]
+        public void DeveRetornarFalseDataJaUsada()
+        {
+            Compromisso compromissoBanco = new Compromisso(0, "Assunto", "Localizacao", 0, DateTime.Now.AddHours(-1), DateTime.Now.AddHours(1), "Link");
+            controladorCompromisso.Inserir(compromissoBanco);
+
+            Compromisso compromisso = new Compromisso(0, "Assunto", "Localizacao", 0, DateTime.Now, DateTime.Now.AddSeconds(10), "Link");
 
             Assert.AreEqual(false, compromisso.Validar());
         }
