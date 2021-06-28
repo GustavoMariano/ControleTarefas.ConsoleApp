@@ -61,7 +61,7 @@ namespace ControleTarefasEContatos.ConsoleApp.Controlador
 
             comando.ExecuteNonQuery();
 
-            conexaoComBanco.Close(); ;
+            conexaoComBanco.Close();
         }
         public override void Excluir(int id)
         {

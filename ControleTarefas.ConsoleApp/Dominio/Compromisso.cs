@@ -6,27 +6,21 @@ namespace ControleTarefasEContatos.ConsoleApp.Dominio
     {
         private string assunto;
         private string localizacao;
-        private int idContato = 0;
+        private int? idContato = 0;
         private DateTime dataInicioCompromisso = DateTime.MinValue;
         private DateTime dataFinalCompromisso = DateTime.MinValue;
         private string linkReuniao;
+        private string nome;
 
         public string Assunto { get => assunto; }
         public string Localizacao { get => localizacao; }
-        public int IdContato { get => idContato; }
+        public int? IdContato { get => idContato; }
         public DateTime DataInicioCompromisso { get => dataInicioCompromisso; }
         public DateTime DataFinalCompromisso { get => dataFinalCompromisso; }
         public string LinkReuniao { get => linkReuniao; }
+        public string Nome { get => nome; }
 
-        public Compromisso(string assunto, string localizacao, DateTime dataInicioCompromisso, DateTime dataFinalCompromisso)
-        {
-            this.assunto = assunto;
-            this.localizacao = localizacao;
-            this.dataInicioCompromisso = dataInicioCompromisso;
-            this.dataFinalCompromisso = dataFinalCompromisso;
-        }
-
-        public Compromisso(int id, string assunto, string localizacao, int idContato, DateTime dataInicioCompromisso, DateTime dataFinalCompromisso, string linkReuniao)
+        public Compromisso(int id, string assunto, string localizacao, int idContato, DateTime dataInicioCompromisso, DateTime dataFinalCompromisso, string linkReuniao, string nome = "")
         {
             this.id = id;
             this.assunto = assunto;
@@ -35,6 +29,7 @@ namespace ControleTarefasEContatos.ConsoleApp.Dominio
             this.dataInicioCompromisso = dataInicioCompromisso;
             this.dataFinalCompromisso = dataFinalCompromisso;
             this.linkReuniao = linkReuniao;
+            this.nome = nome;
         }
 
         public override bool Validar()

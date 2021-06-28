@@ -89,7 +89,6 @@ namespace ControleTarefasEContatos.ConsoleApp.Tela
 
             Console.ReadLine();
         }
-
         public override void EditarRegistro()
         {
             Console.Clear();
@@ -156,7 +155,6 @@ namespace ControleTarefasEContatos.ConsoleApp.Tela
                 Console.ReadLine();
             }
         }
-
         private string GravarContato(int id = 0)
         {
             Contato contato;
@@ -186,7 +184,6 @@ namespace ControleTarefasEContatos.ConsoleApp.Tela
             else
                 return "Contato inválido";
         }
-
         private static void MontarCabecalhoTabela(string configuracaoColunasTabela)
         {
             Console.ForegroundColor = ConsoleColor.Red;

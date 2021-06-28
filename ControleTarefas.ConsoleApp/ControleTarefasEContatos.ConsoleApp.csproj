@@ -58,6 +58,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Dominio\Tarefa.cs" />
     <Compile Include="Tela\TelaBase.cs" />
+    <Compile Include="Tela\TelaCompromisso.cs" />
     <Compile Include="Tela\TelaContato.cs" />
     <Compile Include="Tela\TelaPrincipal.cs" />
     <Compile Include="Tela\TelaTarefa.cs" />

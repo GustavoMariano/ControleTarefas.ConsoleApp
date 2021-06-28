@@ -23,18 +23,7 @@ namespace ControleTarefasEContatos.Tests
 
         #region Testes CRUD
         [TestMethod]
-        public void DeveAdicionarCompromissoSemContato()
-        {
-            Compromisso compromisso = new Compromisso(0,"Assunto 1", "Localizacao 1", 0, DateTime.Today, DateTime.Today.AddDays(2), "");
-            controladorCompromisso.Inserir(compromisso);
-
-            List<Compromisso> listaQtdCompromossoBanco = controladorCompromisso.SelecionarTodosOsRegistrosDoBanco();
-
-            Assert.AreEqual(1, listaQtdCompromossoBanco.Count);
-        }
-
-        [TestMethod]
-        public void DeveAdicionarCompromissoComContato()
+        public void DeveAdicionarCompromisso()
         {
             ControladorContato controladorContato = new ControladorContato();
             Contato contato = new Contato("Gustavo", "gustavomariano@ndd.tech", "3251-8000", "ndd", "dev");
@@ -44,21 +33,43 @@ namespace ControleTarefasEContatos.Tests
 
             Assert.AreEqual(1, listaQtdContatoBanco.Count);
 
-            Compromisso compromisso = new Compromisso(0, "Assunto 1", "Localizacao 1", 1, DateTime.Today, DateTime.Today.AddDays(2), "");
+            Compromisso compromisso = new Compromisso(0, "Assunto 1", "Localizacao 1", 1, DateTime.Today, DateTime.Today.AddDays(2), "", "");
             controladorCompromisso.Inserir(compromisso);
 
             List<Compromisso> listaQtdCompromissoBanco = controladorCompromisso.SelecionarTodosOsRegistrosDoBanco();
 
             Assert.AreEqual(1, listaQtdCompromissoBanco.Count);
+            Assert.AreEqual("Gustavo", listaQtdCompromissoBanco[0].Nome);
         }
+        [TestMethod]
+        public void DeveEditarCompromisso()
+        {
+            ControladorContato controladorContato = new ControladorContato();
+            Contato contato = new Contato("Gustavo", "gustavomariano@ndd.tech", "3251-8000", "ndd", "dev");
+            controladorContato.Inserir(contato);
 
+            Compromisso compromisso = new Compromisso(0,"Assunto 1", "Localizacao 1", 1, DateTime.Today, DateTime.Today.AddDays(2), "");
+            controladorCompromisso.Inserir(compromisso);
+
+            List<Compromisso> compromissoAntesDeEditar = controladorCompromisso.SelecionarTodosOsRegistrosDoBanco();
+
+            compromisso = new Compromisso(0, "Assunto Editado", "", 1, DateTime.Now, DateTime.Now.AddHours(3), "Link");
+            controladorCompromisso.Editar(compromisso, 1);
+
+            List<Compromisso> compromissoDepoisDeEditar = controladorCompromisso.SelecionarTodosOsRegistrosDoBanco();
+
+            Assert.IsTrue(compromissoAntesDeEditar[0].Assunto != compromissoDepoisDeEditar[0].Assunto);
+        }
         [TestMethod]
         public void DeveExcluirUmCompromisso()
         {
-            Compromisso compromisso = new Compromisso(0, "Assunto 1", "Localizacao 1", 0, DateTime.Today, DateTime.Today.AddDays(2), "");
-            
-            controladorCompromisso.Inserir(compromisso);
+            ControladorContato controladorContato = new ControladorContato();
+            Contato contato = new Contato("Gustavo", "gustavomariano@ndd.tech", "3251-8000", "ndd", "dev");
+            controladorContato.Inserir(contato);
+            List<Contato> listaQtdContatoBanco = controladorContato.SelecionarTodosOsRegistrosDoBanco();
 
+            Compromisso compromisso = new Compromisso(0, "Assunto 1", "Localizacao 1", 1, DateTime.Today, DateTime.Today.AddDays(2), "", "");            
+            controladorCompromisso.Inserir(compromisso);
             List<Compromisso> listaQtdCompromissoInseridoBanco = controladorCompromisso.SelecionarTodosOsRegistrosDoBanco();
 
             Assert.AreEqual(1, listaQtdCompromissoInseridoBanco.Count);
@@ -68,6 +79,48 @@ namespace ControleTarefasEContatos.Tests
             List<Compromisso> listaQtdCompromissoDeletadoBanco = controladorCompromisso.SelecionarTodosOsRegistrosDoBanco();
 
             Assert.IsTrue(listaQtdCompromissoDeletadoBanco.Count < listaQtdCompromissoInseridoBanco.Count);
+        }
+        #endregion
+
+        #region Testes Validação
+        [TestMethod]
+        public void DeveRetornarFalseCompromissoNulo()
+        {
+            Compromisso compromisso = new Compromisso(0, "", "", 0, DateTime.MinValue, DateTime.MinValue, "", ""); 
+
+            Assert.AreEqual(false, compromisso.Validar());
+        }
+
+        [TestMethod]
+        public void DeveRetornarFalseLocalizacaoELinkNulos()
+        {
+            Compromisso compromisso = new Compromisso(0, "Assunto", "", 0, DateTime.Now, DateTime.Now, "");
+
+            Assert.AreEqual(false, compromisso.Validar());
+        }
+
+        [TestMethod]
+        public void DeveRetornarFalseDataInicialMinima()
+        {
+            Compromisso compromisso = new Compromisso(0, "Assunto", "Localizcao", 0, DateTime.MinValue, DateTime.Now, "Link");
+
+            Assert.AreEqual(false, compromisso.Validar());
+        }
+
+        [TestMethod]
+        public void DeveRetornarFalseDataFinalMinima()
+        {
+            Compromisso compromisso = new Compromisso(0, "Assunto", "Localizacao", 0, DateTime.Now, DateTime.MinValue, "Link");
+
+            Assert.AreEqual(false, compromisso.Validar());
+        }
+
+        [TestMethod]
+        public void DeveRetornarTrueCompromissoCompleto()
+        {
+            Compromisso compromisso = new Compromisso(0, "Assunto", "Localizacao", 1, DateTime.Now, DateTime.Now.AddDays(2), "Link");
+
+            Assert.AreEqual(true, compromisso.Validar());
         }
         #endregion
     }

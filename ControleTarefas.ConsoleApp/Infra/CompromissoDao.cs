@@ -54,15 +54,18 @@ namespace ControleTarefas.ConsoleApp.Infra
         internal string ObtemQuerySelecionarTodosCompromissos()
         {
             return @"SELECT 
-                        comp.Id,
+                        comp.[Id],
                         [Assunto], 
 		                [Localizacao],
                         [Link],
                         [DataInicio],
                         [DataFinal],
-                        [TbContatos_Id]
+                        [TbContatos_Id], Nome
                     FROM 
-                        TbCompromissos comp";
+                        TbCompromissos comp
+                        INNER JOIN TbContatos cont
+                        ON TbContatos_Id = cont.Id
+                        ";
         }
         internal string ObtemQuerySelecionarCompromissoPorId()
         {
@@ -72,37 +75,23 @@ namespace ControleTarefas.ConsoleApp.Infra
                         [Link],
                         [DataInicio],
                         [DataFinal],
-                        [Contato_Id]
+                        [TbContato_Id]
                     FROM 
                         TbCompromissos
                     WHERE 
                         [ID] = @ID";
         }
 
-        //internal string ObtemQuerySelecionarCompromissoPor()
-        //{
-        //    return @"SELECT 
-        //                [Assunto], 
-		      //          [Localizacao],
-        //                [Link],
-        //                [DataInicio],
-        //                [DataFinal],
-        //                [Contato_Id]
-        //            FROM 
-        //                TbCompromissos
-        //            WHERE 
-        //                [Cargo] = @Cargo";
-        //}
         internal string ObtemQueryAtualizarCompromisso()
         {
-            return @"UPDATE TbContatos 
+            return @"UPDATE TbCompromissos 
 	                SET	
-                        [Assunto], 
-		                [Localizacao],
-                        [Link],
-                        [DataInicio],
-                        [DataFinal],
-                        [Contato_Id]
+                        [Assunto] = @Assunto, 
+		                [Localizacao] = @Localizacao,
+                        [Link] = @Link,
+                        [DataInicio] = @DataInicio,
+                        [DataFinal] = @DataFinal,
+                        [TbContatos_Id] = @TbContato_Id
 	                WHERE 
 		                [Id] = @Id";
         }

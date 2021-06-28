@@ -49,17 +49,38 @@ namespace ControleTarefasEContatos.ConsoleApp.Controlador
                 DateTime dataInicio = Convert.ToDateTime(leitorRegistro["DataInicio"]);
                 DateTime dataFinal = Convert.ToDateTime(leitorRegistro["DataFinal"]);
                 int idContato = 0;
-                if(leitorRegistro["TbContatos_Id"] != DBNull.Value)
+                string nome = "";
+                if (leitorRegistro["TbContatos_Id"] != DBNull.Value)
+                {
                     idContato = Convert.ToInt32(leitorRegistro["TbContatos_Id"]);
-                Compromisso compromisso = new Compromisso(id, assunto, localizacao, idContato, dataInicio, dataFinal, link);
+                    nome = Convert.ToString(leitorRegistro["Nome"]);
+                }
+                Compromisso compromisso = new Compromisso(id, assunto, localizacao, idContato, dataInicio, dataFinal, link, nome);
 
                 listaCompromissos.Add(compromisso);
             }
             return listaCompromissos;
         }
-        public override void Editar(Compromisso registro, int id)
+        public override void Editar(Compromisso compromisso, int idSelecionado)
         {
-            throw new NotImplementedException();
+            SqlConnection conexaoComBanco;
+            SqlCommand comando;
+            AbrirConexaoComBanco(out conexaoComBanco, out comando);
+
+            string sqlAtualizacao = compromissoDao.ObtemQueryAtualizarCompromisso();
+
+            comando.CommandText = sqlAtualizacao;
+            comando.Parameters.AddWithValue("Assunto", compromisso.Assunto);
+            comando.Parameters.AddWithValue("Localizacao", compromisso.Localizacao);
+            comando.Parameters.AddWithValue("Link", compromisso.LinkReuniao);
+            comando.Parameters.AddWithValue("DataInicio", compromisso.DataInicioCompromisso);
+            comando.Parameters.AddWithValue("DataFinal", compromisso.DataFinalCompromisso);
+            comando.Parameters.AddWithValue("TbContato_Id", compromisso.IdContato);
+            comando.Parameters.AddWithValue("Id", idSelecionado);
+
+            comando.ExecuteNonQuery();
+
+            conexaoComBanco.Close();
         }
         public override void Excluir(int id)
         {
