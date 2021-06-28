@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using ControleTarefasEContatos.ConsoleApp.Infra.Comum;
-using System;
 
 namespace ControleTarefasEContatos.ConsoleApp.Controlador
 {

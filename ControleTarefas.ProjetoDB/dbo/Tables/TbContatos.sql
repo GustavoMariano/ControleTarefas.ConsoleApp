@@ -3,6 +3,9 @@
     [Nome]     NVARCHAR (50) NULL,
     [Email]    NVARCHAR (50) NOT NULL,
     [Telefone] NVARCHAR (20) NOT NULL,
-    [Empresa]  NVARCHAR (50)    NULL,
-    [Cargo]    NVARCHAR (50)    NULL
+    [Empresa]  NVARCHAR (50) NULL,
+    [Cargo]    NVARCHAR (50) NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
 );
+
+

@@ -28,14 +28,111 @@ namespace ControleTarefasEContatos.ConsoleApp.Tela
         }
         public override void VisualizarRegistros()
         {
-            Console.WriteLine("1 - Todos os compromissos\n2 - Filtrar por periodo");
+            Console.WriteLine("1 - Todos os compromissos\n2 - Filtrar por periodo\n3 - Compromissos passados\n4 - Compromissos futuros");
             string opcao = Console.ReadLine();
             switch (opcao)
             {
                 case "1": VisualizarTodosOsCompromissos(); break;
                 case "2": VisualizarCompromissoPorPeriodo(); break;
+                case "3": VisualizarCompromissosPassados(); break;
+                case "4": VisualizarCompromissosFuturos(); break;
+                case "5": VisualizarCompromissosDeHoje(); break;
                 default: break;
             }
+        }
+        private void VisualizarCompromissosDeHoje()
+        {
+            Console.Clear();
+            string configuracaColunasTabela = "{0,-05} | {1,-15} | {2,-10} | {3,-15} | {4,-20} | {5,-20} | {6,-25}";
+            MontarCabecalhoTabela(configuracaColunasTabela);
+
+            List<Compromisso> todosCompromissos = controlador.SelecionarTodosOsRegistrosDoBanco();
+            VerificaCompromomissoBanco(todosCompromissos);
+
+            List<Compromisso> compromissosDeHoje = new List<Compromisso>();
+            foreach (var item in todosCompromissos)
+            {
+                if (item.DataInicioCompromisso > DateTime.Today && item.DataInicioCompromisso > DateTime.Today.AddDays(1))
+                    compromissosDeHoje.Add(item);
+            }
+
+            if (todosCompromissos.Count < 1)
+            {
+                Console.WriteLine("Nenhuma tarefa para hoje!!");
+                Console.ReadLine();
+                return;
+            }
+
+            foreach (var compromisso in todosCompromissos)
+            {
+                Console.WriteLine(configuracaColunasTabela, compromisso.id, compromisso.Assunto, compromisso.Localizacao, compromisso.LinkReuniao, compromisso.DataInicioCompromisso, compromisso.DataFinalCompromisso, compromisso.Nome);
+            }
+
+            Console.ReadLine();
+        }
+        private void VisualizarCompromissosFuturos()
+        {
+            Console.Clear();
+            string configuracaColunasTabela = "{0,-05} | {1,-15} | {2,-10} | {3,-15} | {4,-20} | {5,-20} | {6,-25}";
+
+            MontarCabecalhoTabela(configuracaColunasTabela);
+
+            List<Compromisso> todosCompromissos = controlador.SelecionarTodosOsRegistrosDoBanco();
+            VerificaCompromomissoBanco(todosCompromissos);
+
+            List<Compromisso> compromissosFuturos = new List<Compromisso>();
+
+            foreach (var item in todosCompromissos)
+            {
+                if (item.DataInicioCompromisso > DateTime.Now)
+                    compromissosFuturos.Add(item);
+            }
+
+            if (todosCompromissos.Count < 1)
+            {
+                Console.WriteLine("Nenhuma tarefa agendada para o futuro!!");
+                Console.ReadLine();
+                return;
+            }
+
+            foreach (var compromisso in todosCompromissos)
+            {
+                Console.WriteLine(configuracaColunasTabela, compromisso.id, compromisso.Assunto, compromisso.Localizacao, compromisso.LinkReuniao, compromisso.DataInicioCompromisso, compromisso.DataFinalCompromisso, compromisso.Nome);
+            }
+
+            Console.ReadLine();
+        }
+        private void VisualizarCompromissosPassados()
+        {
+            Console.Clear();
+            string configuracaColunasTabela = "{0,-05} | {1,-15} | {2,-10} | {3,-15} | {4,-20} | {5,-20} | {6,-25}";
+
+            MontarCabecalhoTabela(configuracaColunasTabela);
+
+            List<Compromisso> todosCompromissos = controlador.SelecionarTodosOsRegistrosDoBanco();
+            VerificaCompromomissoBanco(todosCompromissos);
+
+            List<Compromisso> compromissosPassados = new List<Compromisso>();
+
+            foreach (var item in todosCompromissos)
+            {
+                if (item.DataInicioCompromisso < DateTime.Now)
+                    compromissosPassados.Add(item);
+            }
+
+            if (todosCompromissos.Count < 1)
+            {
+                Console.WriteLine("Nenhuma tarefa foi realizada!!");
+                Console.ReadLine();
+                return;
+            }
+
+            foreach (var compromisso in todosCompromissos)
+            {
+                Console.WriteLine(configuracaColunasTabela, compromisso.id, compromisso.Assunto, compromisso.Localizacao, compromisso.LinkReuniao, compromisso.DataInicioCompromisso, compromisso.DataFinalCompromisso, compromisso.Nome);
+            }
+
+            Console.ReadLine();
         }
         private void VisualizarCompromissoPorPeriodo()
         {
@@ -56,13 +153,7 @@ namespace ControleTarefasEContatos.ConsoleApp.Tela
                 if (item.DataInicioCompromisso >= dataInicialFiltro && item.DataFinalCompromisso <= dataFinalFiltro)
                     compromissosFiltrados.Add(item);
             }
-
-            if (compromissosFiltrados.Count < 1)
-            {
-                Console.WriteLine("Nenhuma tarefa criada até o momento!!");
-                Console.ReadLine();
-                return;
-            }
+            VerificaCompromomissoBanco(todosCompromissos);
 
             foreach (var tarefa in compromissosFiltrados)
             {
@@ -79,13 +170,7 @@ namespace ControleTarefasEContatos.ConsoleApp.Tela
             MontarCabecalhoTabela(configuracaColunasTabela);
 
             List<Compromisso> todosCompromissos = controlador.SelecionarTodosOsRegistrosDoBanco();
-
-            if (todosCompromissos.Count < 1)
-            {
-                Console.WriteLine("Nenhuma tarefa criada até o momento!!");
-                Console.ReadLine();
-                return;
-            }
+            VerificaCompromomissoBanco(todosCompromissos);
 
             foreach (var compromisso in todosCompromissos)
             {
@@ -103,11 +188,7 @@ namespace ControleTarefasEContatos.ConsoleApp.Tela
             Console.WriteLine();
 
             List<Compromisso> todosCompromissos = controlador.SelecionarTodosOsRegistrosDoBanco();
-            if (todosCompromissos.Count == 0)
-            {
-                Console.ReadLine();
-                return;
-            }
+            VerificaCompromomissoBanco(todosCompromissos);
 
             Console.Write("Digite o ID da contato que deseja editar: ");
             int idSelecionado;
@@ -209,6 +290,15 @@ namespace ControleTarefasEContatos.ConsoleApp.Tela
                 return "Contato inválido";
         }
         #region Métodos Privados
+        private void VerificaCompromomissoBanco(List<Compromisso> todosCompromissos)
+        {
+            if (todosCompromissos.Count < 1)
+            {
+                Console.WriteLine("Nenhuma tarefa criada até o momento!!");
+                Console.ReadLine();
+                return;
+            }
+        }
         private static void MontarCabecalhoTabela(string configuracaoColunasTabela)
         {
             Console.ForegroundColor = ConsoleColor.Red;

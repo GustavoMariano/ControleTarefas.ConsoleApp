@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ControleTarefasEContatos.ConsoleApp.Dominio;
+using System;
+using System.Collections.Generic;
 
 namespace ControleTarefasEContatos.ConsoleApp.Tela
 {
@@ -41,6 +43,15 @@ namespace ControleTarefasEContatos.ConsoleApp.Tela
         public virtual void ExcluirRegistro() { }
 
         #region Métodos privados
+        protected void VerificaRegistrosBanco(List<EntidadeBase> todosRegistros)
+        {
+            if (todosRegistros.Count < 1)
+            {
+                Console.WriteLine("Nenhuma tarefa criada até o momento!!");
+                Console.ReadLine();
+                return;
+            }
+        }
         private static bool ValidaOpcao(string opcao)
         {
             if (opcao != "1" && opcao != "2" && opcao != "3" && opcao != "4" && opcao != "s" && opcao != "S")

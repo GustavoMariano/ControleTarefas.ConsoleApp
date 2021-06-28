@@ -8,7 +8,6 @@ namespace ControleTarefasEContatos.ConsoleApp.Tela
     public class TelaContato : TelaBase
     {
         private Controlador<Contato> controlador;
-
         public TelaContato(string titulo) : base(titulo)
         {
             this.controlador = new ControladorContato();
@@ -28,7 +27,6 @@ namespace ControleTarefasEContatos.ConsoleApp.Tela
                 Console.Clear();
             }
         }
-
         public override void VisualizarRegistros()
         {
             Console.WriteLine("1 - Todos os contatos\n2 - Filtrar por cargo");
@@ -40,7 +38,6 @@ namespace ControleTarefasEContatos.ConsoleApp.Tela
                 default: break;
             }
         }
-
         private void VisualizarContatosPorCargo()
         {
             Console.WriteLine("Digite o cargo que deseja filtrar");
@@ -67,7 +64,6 @@ namespace ControleTarefasEContatos.ConsoleApp.Tela
 
             Console.ReadLine();
         }
-
         private void VisualizarTodosOsContatos()
         {
             string configuracaColunasTabela = "{0,-05} | {1,-15} | {2,-10} | {3,-15} | {4,-20} | {5,-20}";
