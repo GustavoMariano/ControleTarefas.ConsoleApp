@@ -1,7 +1,7 @@
 ﻿using System;
-using ControleTarefasEContatos.ConsoleApp.Tela;
+using eAgenda.ConsoleApp.Shared;
 
-namespace ControleTarefasEContatos.ConsoleApp
+namespace eAgenda.ConsoleApp
 {
     class Program
     {        

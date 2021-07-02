@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("eAgenda.ConsoleApp")]
+[assembly: AssemblyTitle("eAgenda.Dominio")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("eAgenda.ConsoleApp")]
+[assembly: AssemblyProduct("eAgenda.Dominio")]
 [assembly: AssemblyCopyright("Copyright ©  2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("09bfd45b-cda4-4a2e-a401-f1f2ba77f661")]
+[assembly: Guid("77c8f04d-c4f5-4e06-9ade-a98da7e07f51")]
 
 // Version information for an assembly consists of the following four values:
 //

@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="eAgenda.ConsoleApp.TelaBase" Collapsed="true">
+    <Position X="9.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAACAAAAAAAAAAAAACAAAICAAAAAAAAAAAFABAABA=</HashCode>
+      <FileName>Tela\TelaBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="eAgenda.ConsoleApp.TelaCompromisso">
+    <Position X="7" Y="1.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAQACgAABEAAAAQAAICCAAAAAAAAAABABAAAE=</HashCode>
+      <FileName>Tela\TelaCompromisso.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="eAgenda.ConsoleApp.TelaContato" Collapsed="true">
+    <Position X="9" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAEAAAAAAICCAAAAAAAAAABIBAAAE=</HashCode>
+      <FileName>Tela\TelaContato.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="eAgenda.ConsoleApp.TelaPrincipal" Collapsed="true">
+    <Position X="10.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BgAAAAABAAAAAAAAAAAAAABAEAAAAABAABAAAAAAAAA=</HashCode>
+      <FileName>Tela\TelaPrincipal.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="eAgenda.ConsoleApp.TelaTarefa" Collapsed="true">
+    <Position X="12.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAQAAAAIAAAICCAAAAAEACAABABAEAE=</HashCode>
+      <FileName>Tela\TelaTarefa.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="eAgenda.Dominio.Compromisso">
+    <Position X="0.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAgAAAMIAAABAACAAAAAwAIAAQCAAEEAgA=</HashCode>
+      <FileName>Dominio\Compromisso.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="eAgenda.Dominio.Contato" Collapsed="true">
+    <Position X="2.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ARAAAAAQgCAAAIAgAAAAAAAAAAAAAQABAAAAAQEAAAA=</HashCode>
+      <FileName>Dominio\Contato.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="eAgenda.Dominio.EntidadeBase" Collapsed="true">
+    <Position X="2.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAgA=</HashCode>
+      <FileName>Dominio\EntidadeBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="eAgenda.Dominio.Tarefa" Collapsed="true">
+    <Position X="4" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAACAAACAAAAAgAAgAAAAIAAAAwAAAAIAEAAAABA=</HashCode>
+      <FileName>Dominio\Tarefa.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="eAgenda.Controladores.Controlador&lt;T&gt;" Collapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAAQgQAEQIgAAQAAAAAAAACAAAAABABQAAA=</HashCode>
+      <FileName>Controlador\Controlador.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="eAgenda.Controladores.ControladorCompromisso">
+    <Position X="2.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEQAgAAQAAAAAAAADAAAAAAAAQAAA=</HashCode>
+      <FileName>Controlador\ControladorCompromisso.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="eAgenda.Controladores.ControladorContato" Collapsed="true">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEQAgAAQAAAAAAAACIAAAAAAAQACA=</HashCode>
+      <FileName>Controlador\ControladorContato.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="eAgenda.Controladores.ControladorTarefa" Collapsed="true">
+    <Position X="4" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEQAgAgQQAAAAAAACAAAAAAAAQAAA=</HashCode>
+      <FileName>Controlador\ControladorTarefa.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
